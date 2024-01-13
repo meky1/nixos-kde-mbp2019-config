@@ -22,21 +22,23 @@ This repository contains my personal NixOS configuration files tailored for a Ma
 
 ## Installation
 
-1- Add and update `nixos-hardware` channel:
+1- Copy `configuration.nix` to `/etc/nixos/`.
+
+2- Add and update `nixos-hardware` channel:
 
 ```shell
 sudo nix-channel --add https://github.com/NixOS/nixos-hardware/archive/master.tar.gz nixos-hardware
 sudo nix-channel --update
 ```
 
-2- Download the following files and copy them to `/etc/nixos`:
+3- Download the following files and copy them to `/etc/nixos`:
   - `pipewire_sink_conf.nix` from https://github.com/lemmyg/t2-apple-audio-dsp/tree/speakers_161
   - `pipewire_mic_conf.nix` from https://github.com/lemmyg/t2-apple-audio-dsp/tree/mic
   - `nginx.nix` (if needed) from https://github.com/TarikSudo/nginx-multidomain-nixos
 
-3- Copy your WiFi and Bluetooth firmware to `/etc/nixos/files/firmware/brcm`, if you do not have the firmware, follow the guide on [t2linux.org](https://wiki.t2linux.org/guides/wifi-bluetooth/).
+4- Copy your WiFi and Bluetooth firmware to `/etc/nixos/files/firmware/brcm`, if you do not have the firmware, follow the guide on [t2linux.org](https://wiki.t2linux.org/guides/wifi-bluetooth/).
 
-4- Rebuild your NixOS configuration to apply the changes. Please note that the `nixos-hardware` configuration will download, patch, and install a kernel. This process is expected to take between 1 to 2 hours, depending on your system and internet speed. For more information, please visit the [nixos-hardware T2 chip page](https://github.com/NixOS/nixos-hardware/tree/master/apple/t2).
+5- Install or rebuild your NixOS configuration to apply the changes. Please note that the `nixos-hardware` configuration will download, patch, and install a kernel. This process is expected to take between 1 to 2 hours, depending on your system and internet speed. For more information, please visit the [nixos-hardware T2 chip page](https://github.com/NixOS/nixos-hardware/tree/master/apple/t2).
 
 ## Disclaimer
 
