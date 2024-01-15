@@ -116,6 +116,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Enable virtualbox
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "me" ];           # Replace "me" with your username
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -131,7 +136,6 @@
     pkgs.gimp
     pkgs.libreoffice-qt
     pkgs.obs-studio
-    pkgs.virtualbox
     pkgs.vscodium
     pkgs.thunderbird
     pkgs.telegram-desktop
