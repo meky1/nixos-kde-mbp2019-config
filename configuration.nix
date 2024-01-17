@@ -11,7 +11,6 @@
       ./hardware-configuration.nix
       ./pipewire_sink_conf.nix        # Enhanced audio configuration for improved sound quality on the MacBook Pro 2019. See: https://github.com/lemmyg/t2-apple-audio-dsp/tree/speakers_161
       ./pipewire_mic_conf.nix         # Improved microphone configuration for better audio capture on the MacBook Pro 2019. Details at: https://github.com/lemmyg/t2-apple-audio-dsp/tree/mic
-      ./nginx.nix                     # Nginx web server configuration. Configuration details available at: https://github.com/TarikSudo/nginx-multidomain-nixos
     ];
 
   # Integration of WiFi and Bluetooth firmware
@@ -51,21 +50,21 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Europe/Istanbul";
+  time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "tr_TR.UTF-8";
-    LC_IDENTIFICATION = "tr_TR.UTF-8";
-    LC_MEASUREMENT = "tr_TR.UTF-8";
-    LC_MONETARY = "tr_TR.UTF-8";
-    LC_NAME = "tr_TR.UTF-8";
-    LC_NUMERIC = "tr_TR.UTF-8";
-    LC_PAPER = "tr_TR.UTF-8";
-    LC_TELEPHONE = "tr_TR.UTF-8";
-    LC_TIME = "tr_TR.UTF-8";
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "enr_US.UTF-8";
   };
 
   # Enable the X11 windowing system.
@@ -116,52 +115,25 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable virtualbox
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "me" ];           # Replace "me" with your username
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   # wget
     kate
-    chromium
+    firefox
     pkgs.libsForQt5.kdenlive
     pkgs.libsForQt5.kolourpaint
     pkgs.libsForQt5.ksystemlog
     pkgs.libsForQt5.skanpage
     pkgs.vlc
-    pkgs.gimp
     pkgs.libreoffice-qt
-    pkgs.obs-studio
-    pkgs.vscodium
     pkgs.thunderbird
     pkgs.telegram-desktop
     ladspaPlugins
     calf
     lsp-plugins
-    pkgs.dbeaver
     pkgs.gnome.gnome-disk-utility
-    pkgs.python3
-
-    # Enabling PHP - remove this section if PHP is not required
-    (pkgs.php.buildEnv {
-      extensions = ({ enabled, all }: enabled ++ (with all; [
-        mysqli
-        pdo_mysql
-      ]));
-      extraConfig = ''
-        display_errors = On
-        date.timezone = Europe/Istanbul
-        error_log = /srv/logs/php_errors.log
-        error_reporting = E_ALL
-        memory_limit = 128M
-      '';
-    })
-    # End of PHP configuration
-
   ];
 
   systemd.user.services.pipewire.environment = {
